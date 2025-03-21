@@ -1,0 +1,110 @@
+[package]
+name = "practice_wgpu"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# Try to keep the dependencies to a minimum
+# [dependencies]
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
+wgpu = { version = "*", features = ["webgpu", "glsl"] }
+pollster = { version = "0.3.0" }
+flume = { version = "0.11.0" }
+png = { version = "*" }
+anyhow = { version = "*" }
+thiserror = { version = "*" }
+bytemuck = { version = "*" }
+
+[[bin]]
+name = "device_info"
+
+[[bin]]
+name = "rgb2gray"
+
+[[bin]]
+name = "assign"
+
+
+# [package]
+# name = "wgpu-examples"
+# version.workspace = true
+# authors.workspace = true
+# edition.workspace = true
+# description = "Common example code"
+# homepage.workspace = true
+# repository.workspace = true
+# keywords.workspace = true
+# license.workspace = true
+# publish = false
+
+# [package.metadata.cargo-machete]
+# # Cargo machete struggles with this dev dependency:
+# ignored = ["wasm_bindgen_test"]
+
+# [lib]
+# path = "src/lib.rs"
+# harness = false
+
+# [[bin]]
+# name = "wgpu-examples"
+# path = "src/main.rs"
+# test = false
+
+# [features]
+# default = []
+# webgl = ["wgpu/webgl"]
+# webgpu = ["wgpu/webgpu"]
+
+# [dependencies]
+# bytemuck.workspace = true
+# cfg-if.workspace = true
+# encase = { workspace = true, features = ["glam"] }
+# flume.workspace = true
+# getrandom.workspace = true
+# glam.workspace = true
+# ktx2.workspace = true
+# log.workspace = true
+# nanorand.workspace = true
+# noise.workspace = true
+# obj.workspace = true
+# png.workspace = true
+# pollster.workspace = true
+# web-time.workspace = true
+# wgpu = { workspace = true, default-features = false, features = [
+#     "wgsl",
+#     "dx12",
+#     "metal",
+# ] }
+# winit.workspace = true
+
+# [dev-dependencies]
+# wgpu-test.workspace = true
+
+# [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# env_logger.workspace = true
+
+# [target.'cfg(target_arch = "wasm32")'.dependencies]
+# console_error_panic_hook.workspace = true
+# console_log.workspace = true
+# fern.workspace = true
+# wasm-bindgen.workspace = true
+# wasm-bindgen-futures.workspace = true
+# # We need these features in the framework examples and tests
+# web-sys = { workspace = true, features = [
+#     "Location",
+#     "Blob",
+#     "RequestInit",
+#     "RequestMode",
+#     "Request",
+#     "ImageData",
+#     "Response",
+#     "HtmlImageElement",
+#     "WebGl2RenderingContext",
+#     "CanvasRenderingContext2d",
+# ] }
+
+# [target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+# wasm-bindgen-test.workspace = true
