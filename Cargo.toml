@@ -10,10 +10,10 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
-wgpu = { version = "*", features = ["webgpu", "glsl"] }
+wgpu = { version = "24.0.3", features = ["webgpu", "glsl"] }
 pollster = { version = "0.3.0" }
 flume = { version = "0.11.0" }
-png = { version = "*" }
+png = { version = "0.16" }
 anyhow = { version = "*" }
 thiserror = { version = "*" }
 bytemuck = { version = "*" }

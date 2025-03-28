@@ -57,6 +57,8 @@ async fn run_gpu() -> Result<()> {
     let opts: CliArgs = CliArgs::parse();
     println!("Size: {}", opts.size);
 
+    let size_bytes = opts.size as u64 * size_of::<f32>() as u64;
+
     // create a wgpu instance
     let instance = wgpu::Instance::default();
     println!("Instance: {:?}", instance);
@@ -88,7 +90,7 @@ async fn run_gpu() -> Result<()> {
     // output buffer
     let output_buffer = device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("output_buffer"),
-        size: size_of::<f32>() as u64 * opts.size as u64,
+        size: size_bytes,
         usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
         mapped_at_creation: false,
     });
@@ -98,7 +100,7 @@ async fn run_gpu() -> Result<()> {
     // output staging buffer
     let output_staging_buffer = device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("output_staging"),
-        size: size_of::<f32>() as u64 * opts.size as u64,
+        size: size_bytes,
         usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
         mapped_at_creation: false,
     });
@@ -154,13 +156,7 @@ async fn run_gpu() -> Result<()> {
         cpass.dispatch_workgroups(4, 1, 1);
     }
 
-    encoder.copy_buffer_to_buffer(
-        &output_buffer,
-        0,
-        &output_staging_buffer,
-        0,
-        size_of::<f32>() as u64 * opts.size as u64,
-    );
+    encoder.copy_buffer_to_buffer(&output_buffer, 0, &output_staging_buffer, 0, size_bytes);
 
     queue.submit(Some(encoder.finish()));
 
